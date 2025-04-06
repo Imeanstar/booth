@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+| 개발언어 | 리액트 |
+| --- | --- |
+| DB | firebase |
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2025-2 동아리 박람회 준비용.
 
-## Available Scripts
+증연코인 발급하고 물품살수있게 하기.
 
-In the project directory, you can run:
+[스프레드시트 db 연동 코드](https://www.notion.so/db-1cd8a0e6dc9b8011b15ffa94cc4cb018?pvs=21)
 
-### `npm start`
+[웹 코드](https://www.notion.so/1cd8a0e6dc9b806fb16decd522da9220?pvs=21)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+DB에 저장해야할 정보들
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 사용자 정보(이메일, 보유 코인, 매도 후 보유 금액)
+- 코인 시세(변동시간, 가격)
+- 물품정보(물품이름, 가격, 수량)
+- 마켓정보(구매 요청)
 
-### `npm test`
+### 📌 **스프레드시트**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 스프레드시트와 Firebase Firestore DB 연동
+- 스프레드시트에서 **이메일 항목만 DB로 불러오기**
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📌 **로그인 페이지**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 사용자가 입력한 이메일을 DB에 있는 이메일과 대조
+- **일치하면 로그인 처리** (별도의 로그인 인증 X)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### 📌 **실시간 차트 페이지**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 증연코인 시세를 시간별 **차트 형태로 시각화**
+- **매도 기능**: 시장가 매도 (주문 즉시 처리)
+- **매수 기능 없음**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📌 **마켓 페이지**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 사용자들이 물품을 구매할 수 있는 페이지
+- **구매 가능 물품, 가격, 수량 표시** (수량 없으면 ‘품절’ 표시)
+- 구매 시 **구매 요청이 생성**되며, 운영진이 승인해야 결제 완료
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 📌 **구매 응답 페이지**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 사용자가 마켓에서 물품을 구매하면 해당 요청을 표시
+- **요청된 정보가 실시간 갱신**되도록 설정
+- 요청 항목 옆에 **수락 / 취소 버튼 추가**
+    - **수락**: 결제 완료
+    - **취소**: 주문 취소 및 사용자에게 돈 반환
 
-### Code Splitting
+관리자 페이지에 모달로 병합, 기존 페이지는 그냥 로그만 보여주는 페이지로 변경
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+### 📌 **관리자 페이지**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+✅ **코인 관련 기능**
 
-### Making a Progressive Web App
+- **초기가격 설정** (설정 시간도 기록)
+- **사용자에게 증연코인 부여 가능** (이메일 검색 후 수량 입력)
+- **시세 조정 기능** (±50, 100, 150원 변동, 추가 이벤트 없음) 그냥 원하는 가격으로 설정하게 변경
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+✅ **마켓 관련 기능**
 
-### Advanced Configuration
+- **물품 추가, 삭제, 수정 가능**
+    - 마켓 페이지와 동일한 UI
+    - 추가된 물품에 **수정 / 삭제 버튼** 표시
+    - **구매 가능 수량 설정 가능** (품절 설정 포함)
+- **DB 초기화 기능**
+    - 확인 문구(“초기화”)를 입력해야 동작 미구현 알아서 db 수정
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+### 📌 **DB에 저장할 정보**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **사용자 정보** (이메일, 보유 코인, 매도 후 보유 금액)
+- **코인 시세** (변동 시간, 가격)
+- **물품 정보** (이름, 가격, 수량)
+- **마켓 정보** (구매 요청 내역)
+- **로그 기록** (코인 변동, 매도/구매 기록, 승인/취소 기록)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 📌 **운영 규칙**
+
+- **초기 코인 지급량**: 첫 로그인 시 운영자가 설정 가능
+- **사용자 간 거래(P2P) 불가능**
+- **운영 시간**: **9~18시까지만 거래 가능 취소 gpt한테 물어보면 만들어줌**
+- **운영자 권한**: 관리자 페이지 접속 시 모든 기능 사용 가능
+- **알림 기능**: 구매 요청 승인/취소 시 사용자에게 알림 제공
