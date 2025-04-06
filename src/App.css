@@ -1,38 +1,35 @@
-.App {
-  text-align: center;
-}
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import ChartPage from './ChartPage';
+import MarketPage from './MarketPage';
+import PurchaseResponse from './PurchaseResponse';
+import AdminPage from './AdminPage';
+import Login from './Login';
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <li><Link to="/login">로그인</Link></li>
+            <li><Link to="/chart">실시간 차트</Link></li>
+            <li><Link to="/market">마켓</Link></li>
+            <li><Link to="/purchase-response">구매 응답</Link></li>
+            <li><Link to="/admin">관리자 페이지</Link></li>
+          </ul>
+        </nav>
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/chart" element={<ChartPage />} />
+          <Route path="/market" element={<MarketPage />} />
+          <Route path="/purchase-response" element={<PurchaseResponse />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+export default App;
