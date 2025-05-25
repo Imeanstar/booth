@@ -130,6 +130,67 @@ const ChartPage = () => {
   };
 
   return (
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-[#f8fbfa] justify-between group/design-root overflow-x-hidden"
+      // style='font-family: "Spline Sans", "Noto Sans", sans-serif;'
+    >
+      <div>
+        <div class="flex flex-wrap gap-4 px-4 py-6">
+          <div class="flex min-w-72 flex-1 flex-col gap-2">
+            <p class="text-[#0e1a13] text-base font-medium leading-normal">실시간 증연코인 시세</p>
+            <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight truncate">
+              {currentPrice !== null && (
+                <h3>현재 가격: {currentPrice.toLocaleString()} 원</h3>
+              )}
+            </p>
+            <div class="flex gap-1">
+              <p class="text-[#51946b] text-base font-normal leading-normal">1D</p>
+              <p class="text-[#078829] text-base font-medium leading-normal">+1.23%</p>
+            </div>
+            {loading ? <div>Loading...</div> : <Line data={chartData} />}
+
+            {currentPrice !== null && (
+              <h3>현재 가격: {currentPrice.toLocaleString()} 원</h3>
+            )}
+          </div>
+        </div>
+        <p class="text-[#0e1a13] text-base font-normal leading-normal pb-0 pt-1 px-4">보유 코인: {userCoin} 개</p>
+        <p class="text-[#0e1a13] text-base font-normal leading-normal pb-0 pt-1 px-4">보유 금액: {userBalance.toLocaleString()} 원</p>
+        {/* <div class="flex py-3 px-4"></div>
+        <p class="text-[#0e1a13] text-base font-normal leading-normal pb-0 pt-1 px-4">코인 매도하기</p> */}
+        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+          <label class="flex flex-col min-w-40 flex-1">
+            <input
+              type="number"
+              placeholder="매도 수량"
+              value={sellAmount}
+              onChange={(e) => setSellAmount(e.target.value)}
+              min={1}
+              max={userCoin}
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+            />
+            <div>
+              <div class="flex px-4 py-3">
+              <button onClick={handleSell} disabled={!sellAmount || userCoin <= 0}
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-[#39e079] text-[#0e1a13] text-base font-bold leading-normal tracking-[0.015em]"
+              >
+              <span class="truncate">매도하기</span>
+              </button>
+            </div>
+            <div class="h-5 bg-[#f8fbfa]"></div>
+            </div>
+            {/* 예상 수익 표시 */}
+            {sellAmount > 0 && currentPrice && (
+            <p style={{ marginTop: '10px' }}>
+              예상 수익: {(currentPrice * Number(sellAmount)).toLocaleString()} 원
+            </p>
+            )}
+          </label>
+        </div>
+      </div>
+    </div>
+
+/*
     <div>
       <h2>실시간 증연코인 시세</h2>
       {loading ? <div>Loading...</div> : <Line data={chartData} />}
@@ -142,7 +203,7 @@ const ChartPage = () => {
         <p>보유 코인: {userCoin} 개</p>
         <p>보유 금액: {userBalance.toLocaleString()} 원</p>
 
-        {/* 매도 입력 및 버튼 */}
+        {/* 매도 입력 및 버튼 *//*}
         <input
           type="number"
           placeholder="매도 수량"
@@ -156,7 +217,7 @@ const ChartPage = () => {
           매도하기
         </button>
 
-        {/* 예상 수익 표시 */}
+        {/* 예상 수익 표시 *//*}
         {sellAmount > 0 && currentPrice && (
           <p style={{ marginTop: '10px' }}>
             예상 수익: {(currentPrice * Number(sellAmount)).toLocaleString()} 원
@@ -164,7 +225,9 @@ const ChartPage = () => {
         )}
       </div>
     </div>
+*/
   );
+
 };
 
 export default ChartPage;
