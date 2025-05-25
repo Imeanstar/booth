@@ -4,14 +4,14 @@ import { getFirestore, collection, query, where, getDocs } from 'firebase/firest
 
 // Firebase 설정
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project.firebaseapp.com",
+    apiKey: "AIzaSyCNWJuk6YblNTMIJAkcjsYMOBWskI2N2dg",
+    authDomain: "booth-aia.firebaseapp.com",
     databaseURL: "https://your-project.firebaseio.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project.appspot.com",
-    messagingSenderId: "123456789012",
-    appId: "1:123456789012:web:abcdef12345678",
-    measurementId: "G-XXXXXXXXXX"
+    projectId: "booth-aia",
+    storageBucket: "booth-aia.firebasestorage.app",
+    messagingSenderId: "241305934309",
+    appId: "1:241305934309:web:06f919ec7bba3f2fd9370c",
+    measurementId: "G-44E1MLNN4Z"
   };
   
 

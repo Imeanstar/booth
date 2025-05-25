@@ -36,3 +36,25 @@ const App = () => {
 };
 
 export default App;
+
+
+/*
+[노션 질문]
+1. firebaseConfig 내용을 내 firebase를 따로 만들어서 그걸로 바꿔야되는건지 (웹코드 부분)
+2. (스프레드시트->db연동 부분) syncSheetToFirestore.js를 따로 만들어야되는건지, 아니면 어디 따로 입력하는 부분이 있는건지
+
+[별개 질문]
+3. 따로 포크떠와서 하고있는데 그래서 안되는건가? 그냥 클론만 떠와서 해볼까?
+4. 일단 firebase를 해결해야 뭐라도 만지긴 할듯,, 따로 설치해서 뭘 해야되는지... 
+아니면 뭐 코드만 몇 자 바꾸면 있는 firebase접근해서 할 수 있는지 그런거 좀 알려주세요,, 
+
+
+
+
+1. 자기 firebase 프로젝트 만들어서 firestore database 열고 설정가서 내리면 firebaseconfig 있는데 복붙하면됨.
+2. 스프레드시트에서 앱스크립트를 들어가서 syncSheetToFirestore.js 생성후 만들어야함 
+그리고 코드에서 firebase db경로 수정, 보안규칙 노션에 올려놓은거 복붙.
+
+3. 클론하고 언급해둔부분만 바꾸면 사용가능할듯함(아마)
+4.위에거 하면될듯함
+*/

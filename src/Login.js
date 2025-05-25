@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { db } from './firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
+// ID : admin@example.com
+// PW : p@22w0rd
+
 const Login = ({ setIsLoggedIn }) => {
   // 이메일 입력값과 에러 메시지 상태
   const [email, setEmail] = useState('');
