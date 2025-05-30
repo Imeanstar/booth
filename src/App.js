@@ -8,6 +8,7 @@ import AdminPage from './AdminPage.js';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+  const userRole = localStorage.getItem('userRole');
 
   return (
     <Router>
@@ -37,11 +38,20 @@ const App = () => {
 
         <Routes>
           {/* 로그인 페이지가 첫 화면에 나오도록 설정 */}
-          <Route path="/" element={isLoggedIn ? <Navigate to="/chart" /> : <Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route 
+            path="/" 
+            element={
+              isLoggedIn 
+              ? userRole === 'admin' 
+                ? <Navigate to ="/admin" /> 
+                : <Navigate to="/chart" /> 
+              : <Login setIsLoggedIn={setIsLoggedIn} />
+            } 
+          />
           <Route path="/chart" element={isLoggedIn ? <ChartPage /> : <Navigate to="/" />} />
           <Route path="/market" element={isLoggedIn ? <MarketPage /> : <Navigate to="/" />} />
           <Route path="/purchase-response" element={<PurchaseResponse />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={isLoggedIn && userRole === 'admin' ? <AdminPage /> : <Navigate to = "/" />} />
         </Routes>
       </div>
     </Router>
