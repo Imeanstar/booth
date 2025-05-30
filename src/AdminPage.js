@@ -255,30 +255,89 @@ const AdminPage = () => {
       )}
 
       {/* 탭 */}
-      <div>
-        <button onClick={() => setActiveTab('coin')}>증연코인 관리</button>
-        <button onClick={() => setActiveTab('market')}>마켓 관리</button>
+      <div class="pb-3">
+        <div class="flex border-b border-[#d3e3d9] px-4 gap-8">
+          <button onClick={() => setActiveTab('coin')}>증연코인 관리</button>
+          <button onClick={() => setActiveTab('market')}>마켓 관리</button>
+        </div>
       </div>
 
       {/* 코인 탭 */}
       {activeTab === 'coin' && (
         <div>
-          <h3>증연코인 설정</h3>
-          <div>
+          <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">증연 코인 설정</h2>
+          <h2 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-2 pt-4">가격 설정</h2>
+          <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+            <label class="flex flex-col min-w-40 flex-1">
+              <input 
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+                type="number"
+                value={coinPrice}
+                onChange={(e) => setCoinPrice(e.target.value)}
+                placeholder="시세 입력"
+              />
+            </label>
+          </div>
+          <div class="flex px-4 py-3 justify-end">
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl h-10 px-4 bg-[#38e078] text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]"
+              onClick={handleSetCoinPrice}
+            >
+              <span class="truncate">가격 설정</span>
+            </button>
+          </div>
+          {/* <div>
             <label>가격 설정 :
               <input type="number" value={coinPrice} onChange={(e) => setCoinPrice(e.target.value)} placeholder="시세 입력" />
             </label>
             <button onClick={handleSetCoinPrice}>가격 설정</button>
-          </div>
+          </div> */}
           <div>
-            <h4>사용자에게 증연코인 부여</h4>
+            <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">사용자에게 증연코인 부여</h2>
+            <h2 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-2 pt-4">이메일 : </h2>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <input 
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+                  type="email"
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                  placeholder="사용자 이메일"
+                />
+              </label>
+            </div>
+            <h2 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-2 pt-4">증연코인 수:</h2>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <input
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+                  type="number"
+                  value={coinAmount}
+                  onChange={(e) => setCoinAmount(e.target.value)}
+                  placeholder="부여할 코인 수"
+                />
+              </label>
+            </div>
+            <div>
+              <div class="flex px-4 py-3">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#38e078] text-[#0e1a13] text-base font-bold leading-normal tracking-[0.015em]"
+                  onClick={handleGiveCoins}
+                >
+                  <span class="truncate">부여(양수 부여, 음수 차감)</span>
+                </button>
+              </div>
+            </div>
+
+
+            {/* <h4>사용자에게 증연코인 부여</h4>
             <label>이메일:
               <input type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} placeholder="사용자 이메일" />
             </label>
             <label>증연코인 수:
               <input type="number" value={coinAmount} onChange={(e) => setCoinAmount(e.target.value)} placeholder="부여할 코인 수" />
             </label>
-            <button onClick={handleGiveCoins}>부여(양수 부여, 음수 차감)</button>
+            <button onClick={handleGiveCoins}>부여(양수 부여, 음수 차감)</button> */}
           </div>
         </div>
       )}
@@ -286,19 +345,66 @@ const AdminPage = () => {
       {/* 마켓 탭 */}
       {activeTab === 'market' && (
         <div>
-          <h3>마켓 관리</h3>
+          <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">물품 추가</h2>
+          <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+            <label class="flex flex-col min-w-40 flex-1">
+              <input 
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+                type="text" 
+                placeholder="물품 이름" 
+                value={newItem.name} 
+                onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+              />
+            </label>
+          </div>
+          <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+            <label class="flex flex-col min-w-40 flex-1">
+              <input 
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+                type="text" 
+                placeholder="가격" 
+                value={newItem.price} 
+                onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
+              />
+            </label>
+          </div>
+          <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+            <label class="flex flex-col min-w-40 flex-1">
+              <input 
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
+                type="text" 
+                placeholder="수량" 
+                value={newItem.stock} 
+                onChange={(e) => setNewItem({ ...newItem, stock: e.target.value })}
+              />
+            </label>
+          </div>
+          <div class="flex px-4 py-3 justify-end">
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e078] text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]"
+              onClick={handleAddItem}
+            >
+              <span class="truncate">물품 추가</span>
+            </button>
+          </div>
+
+          {/* <h3>마켓 관리</h3>
           <div>
             <h4>물품 추가</h4>
             <input type="text" placeholder="물품 이름" value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} />
             <input type="number" placeholder="가격" value={newItem.price} onChange={(e) => setNewItem({ ...newItem, price: e.target.value })} />
             <input type="number" placeholder="수량" value={newItem.stock} onChange={(e) => setNewItem({ ...newItem, stock: e.target.value })} />
             <button onClick={handleAddItem}>물품 추가</button>
-          </div>
+          </div> */}
 
-          <h4>물품 리스트</h4>
+          <h4 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">물품 리스트</h4>
           {marketItems.map(item => (
-            <div key={item.id}>
-              <span>{item.name} | 가격: {item.price} | 수량: {item.stock}</span>
+            <div class="flex items-center gap-4 bg-[#f8fbfa] px-4 min-h-[72px] py-2 justify-between" key={item.id}>
+              <div class="flex flex-col justify-center pr-32">
+                <span class="text-[#0e1a13] text-base font-medium leading-normal line-clamp-1">{item.name}</span>
+                <span class="text-[#51946b] text-sm font-normal leading-normal line-clamp-2">가격: {item.price} | 수량: {item.stock}</span>
+              </div>
+              {/* <span>{item.name} | 가격: {item.price} | 수량: {item.stock}</span> */}
               <button onClick={() => handleDeleteItem(item.id)}>삭제</button>
               <button onClick={() => setEditItem(item)}>수정</button>
             </div>

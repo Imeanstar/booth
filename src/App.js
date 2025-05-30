@@ -14,27 +14,29 @@ const App = () => {
     <Router>
       <div>
         {/* 로그인 상태에 따라 다르게 표시되는 네비게이션 */}
-        {isLoggedIn && (
-          <nav>
-            <div class="pb-3">
-              <div class="flex border-b border-[#d1e6d9] px-4 gap-8"><Link to="/chart">
-                <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#39e079] text-[#0e1a13] pb-[13px] pt-4" href="#">
-                  <p class="text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]">Chart</p>
-                </a></Link><Link to="/market">
-                <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#51946b] pb-[13px] pt-4" href="#">
-                  <p class="text-[#51946b] text-sm font-bold leading-normal tracking-[0.015em]">Market</p>
-                </a></Link>
-              </div>
-            </div>
+        {isLoggedIn 
+          ? userRole === 'admin' 
+            ? (
+              <nav>
 
-            
-            {/* <ul style={{ display: 'flex', justifyContent: 'space-around' }}>
-              <li><Link to="/chart">실시간 차트</Link></li>
-              <li><Link to="/market">마켓</Link></li>
-            </ul> */}
-            
-          </nav>
-        )}
+              </nav>
+              ) 
+        
+          : (
+            <nav>
+              <div class="pb-3">
+                <div class="flex border-b border-[#d1e6d9] px-4 gap-8"><Link to="/chart">
+                  <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#39e079] text-[#0e1a13] pb-[13px] pt-4" href="#">
+                    <p class="text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]">Chart</p>
+                  </a></Link><Link to="/market">
+                  <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#51946b] pb-[13px] pt-4" href="#">
+                    <p class="text-[#51946b] text-sm font-bold leading-normal tracking-[0.015em]">Market</p>
+                  </a></Link>
+                </div>
+              </div>
+            </nav>
+          ) 
+        : <div></div>}
 
         <Routes>
           {/* 로그인 페이지가 첫 화면에 나오도록 설정 */}
