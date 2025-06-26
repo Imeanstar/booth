@@ -100,9 +100,11 @@ const MarketPage = () => {
       <h2>🛒 마켓</h2>
 
       {/* 사용자 보유 금액 표시 */}
-      <div style={{ marginBottom: '15px' }}>
+      {/* <div style={{ marginBottom: '15px' }}>
         🪙 현재 보유 금액: <strong>{userBalance.toLocaleString()}</strong> 원
-      </div>
+      </div> */}
+      <h3 class="text-[#101913] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">현재 보유 금액</h3>
+      <p class="text-[#101913] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">{userBalance.toLocaleString()} 원</p> 
 
       {/* 로딩 상태 또는 아이템 목록 표시 */}
       {loading ? (
@@ -117,15 +119,22 @@ const MarketPage = () => {
               <ul>
                 {items.map((item) => (
                   <li key={item.id}>
-                    <div>
-                      <p><strong>{item.name}</strong></p>
-                      <p>가격: {item.price.toLocaleString()} 원</p>
-                      <p>수량: {item.stock} 개</p>
+                    <div class="flex items-center gap-4 bg-[#f9fbfa] px-4 min-h-[72px] py-2 justify-between">
+                      <div class="flex flex-col justify-center">
+                      <p class="text-[#101913] text-base font-medium leading-normal line-clamp-1">{item.name}</p>
+                      <p class="text-[#5a8c6d] text-sm font-normal leading-normal line-clamp-2">가격: {item.price.toLocaleString()} 원 | 수량: {item.stock} 개</p>
+                      </div>
+                      <div class="shrink-0">
                       {item.stock > 0 ? (
-                        <button onClick={() => handleBuy(item)}>구매하기</button>
+                        <button 
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#e9f1ec] text-[#101913] text-sm font-medium leading-normal w-fit"
+                          onClick={() => handleBuy(item)}>
+                            <span class="truncate">구매하기</span>
+                        </button>
                       ) : (
                         <button disabled>품절</button>
                       )}
+                      </div>
                     </div>
                     <hr />
                   </li>
