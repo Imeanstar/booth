@@ -1,3 +1,8 @@
+// TODOLIST
+// 각 페이지 modal창
+// 구글폼 연동 기능 (완료)
+
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
