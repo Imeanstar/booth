@@ -1,7 +1,9 @@
 // TODOLIST
 // 각 페이지 modal창
 // 구글폼 연동 기능 (완료)
-
+// nav bar animation 및 색상 변환 작업
+// 코인 가격 chart
+// 구글폼 적으면 자동으로 코인 들어가게 할까?
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
