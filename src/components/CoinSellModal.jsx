@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, } from "../components/ui/dialog";
 import { Button } from "../components/ui/button";
 
-const CoinSellModal = ({ amount, onConfirm }) => {
+const CoinSellModal = ({ amount, onConfirm, currentPrice }) => {
     const [showResult, setShowResult] = useState(false);
     const [earned, setEarned] = useState(0);
 
     const handleConfirm = () => {
-        const total = amount * 500;
+        const total = amount * currentPrice;
         setEarned(total);
         setShowResult(true);
         onConfirm?.();

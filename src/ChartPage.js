@@ -229,6 +229,7 @@ const ChartPage = () => {
           </label>
             <CoinSellModal
               amount={Number(sellAmount)}
+              currentPrice={currentPrice}
               onConfirm={()=>confirmSell(Number(sellAmount))}
             />
         </div>
