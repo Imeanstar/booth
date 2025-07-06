@@ -42,6 +42,7 @@ const ChartPage = () => {
         setCurrentPrice(docSnapshot.data().price);
       }
     });
+    
 
     // 사용자 정보 불러오기
     const fetchUserData = async () => {
@@ -98,7 +99,7 @@ const ChartPage = () => {
       setUserCoin(prev => prev - amountToSell);
       setUserBalance(prev => prev + earned);
       setSellAmount('');
-      alert(`${amountToSell}개 매도 완료! ${earned}원 획득.`);
+      // alert(`${amountToSell}개 매도 완료! ${earned}원 획득.`);
     } catch (err) {
       console.error('매도 실패:', err);
       alert('매도 중 오류가 발생했습니다.');
@@ -189,16 +190,11 @@ const ChartPage = () => {
             </div>
             {loading ? <div>Loading...</div> : <Line data={chartData} options={chartOption} />}
 
-            {/* {currentPrice !== null && (
-              <h3>현재 가격: {currentPrice.toLocaleString()} 원</h3>
-            )} */}
           </div>
         </div>
         <br/>
         <p className="text-[#0e1a13] text-base font-semibold leading-normal pb-0 pt-1 px-4">보유 코인: {userCoin.toLocaleString()} 개</p>
         <p className="text-[#0e1a13] text-base font-semibold leading-normal pb-0 pt-1 px-4">보유 금액: {userBalance.toLocaleString()} 원</p>
-        {/* <div class="flex py-3 px-4"></div>
-        <p class="text-[#0e1a13] text-base font-normal leading-normal pb-0 pt-1 px-4">코인 매도하기</p> */}
         <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
           <label className="flex flex-col min-w-40 flex-1">
             <input
@@ -210,22 +206,6 @@ const ChartPage = () => {
               max={userCoin}
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
             />
-            {/* <div>
-              <div className="flex px-4 py-3">
-              <button onClick={handleSell} disabled={!sellAmount || userCoin <= 0}
-              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-[#39e079] text-[#0e1a13] text-base font-bold leading-normal tracking-[0.015em]"
-              >
-              <span className="truncate">매도하기</span>
-              </button>
-            </div>
-            <div className="h-5 bg-[#f8fbfa]"></div>
-            </div> */}
-            {/* 예상 수익 표시 */}
-            {/* {sellAmount > 0 && currentPrice && (
-            <p style={{ marginTop: '10px' }}>
-              예상 수익: {(currentPrice * Number(sellAmount)).toLocaleString()} 원
-            </p>
-            )} */}
           </label>
             <CoinSellModal
               amount={Number(sellAmount)}

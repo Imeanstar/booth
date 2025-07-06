@@ -11,6 +11,7 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
+import MarketBuyModal from './components/MarketBuyModal';
 
 const MarketPage = () => {
   const [items, setItems] = useState([]); // 마켓 아이템 목록 상태
@@ -88,7 +89,6 @@ const MarketPage = () => {
         });
       }
 
-      alert(`${item.name} 구매 요청이 제출되었습니다.`);
     } catch (error) {
       console.error('구매 요청 실패:', error);
       alert('구매 요청 제출에 실패했습니다.');
@@ -97,12 +97,6 @@ const MarketPage = () => {
 
   return (
     <div>
-      <h2>🛒 마켓</h2>
-
-      {/* 사용자 보유 금액 표시 */}
-      {/* <div style={{ marginBottom: '15px' }}>
-        🪙 현재 보유 금액: <strong>{userBalance.toLocaleString()}</strong> 원
-      </div> */}
       <h3 class="text-[#101913] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">현재 보유 금액</h3>
       <p class="text-[#101913] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">{userBalance.toLocaleString()} 원</p> 
 
@@ -126,11 +120,7 @@ const MarketPage = () => {
                       </div>
                       <div class="shrink-0">
                       {item.stock > 0 ? (
-                        <button 
-                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#e9f1ec] text-[#101913] text-sm font-medium leading-normal w-fit"
-                          onClick={() => handleBuy(item)}>
-                            <span class="truncate">구매하기</span>
-                        </button>
+                        <MarketBuyModal item={item} onConfirm={handleBuy} />
                       ) : (
                         <button disabled>품절</button>
                       )}

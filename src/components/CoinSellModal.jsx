@@ -5,6 +5,7 @@ import { Button } from "../components/ui/button";
 const CoinSellModal = ({ amount, onConfirm, currentPrice }) => {
     const [showResult, setShowResult] = useState(false);
     const [earned, setEarned] = useState(0);
+    const [open, setOpen] = useState(false);
 
     const handleConfirm = () => {
         const total = amount * currentPrice;
@@ -13,11 +14,20 @@ const CoinSellModal = ({ amount, onConfirm, currentPrice }) => {
         onConfirm?.();
     };
 
+    const handleClose = () => {
+        setShowResult(false);
+        setEarned(0);
+        setOpen(false);
+    }
+
 
     return(
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-[#39e079] text-black font-bold">
+                <Button 
+                    className="bg-[#39e079] text-black font-bold"
+                    onClick={()=>setOpen(true)}    
+                >
                     코인 판매하기
                 </Button>
             </DialogTrigger>
@@ -30,7 +40,7 @@ const CoinSellModal = ({ amount, onConfirm, currentPrice }) => {
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">취소</Button>
+                            <Button variant="outline" onClick={handleClose}>취소</Button>
                         </DialogClose>
                         <Button onClick={handleConfirm} className="bg-green-500 text-white">
                             판매 확정
@@ -50,7 +60,7 @@ const CoinSellModal = ({ amount, onConfirm, currentPrice }) => {
                     </div>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button className="mt-2">닫기</Button>
+                            <Button className="mt-2" onClick={handleClose}>닫기</Button>
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>
