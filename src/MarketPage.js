@@ -11,6 +11,8 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './components/ui/dialog';
+import { Button } from './components/ui/button';
 import MarketBuyModal from './components/MarketBuyModal';
 
 const MarketPage = () => {
@@ -18,6 +20,9 @@ const MarketPage = () => {
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [userBalance, setUserBalance] = useState(0); // 사용자 잔액 상태
   const [userDocId, setUserDocId] = useState(null); // 사용자 문서 ID
+  const [errorModal, setErrorModal] = useState({ open: false, message: '' });
+  const [purchaseSuccess, setPurchaseSuccess] = useState({ open: false, itemName: '' });
+
 
   const userEmail = localStorage.getItem('userEmail'); // 로컬 스토리지에서 사용자 이메일 가져오기
 
@@ -58,12 +63,13 @@ const MarketPage = () => {
   // 구매 요청 처리 함수
   const handleBuy = async (item) => {
     if (item.stock <= 0) {
-      alert(`${item.name}는 품절입니다.`);
+      setErrorModal({ open: true, message: `${item.name}는 품절입니다.` });
       return;
     }
 
     if (userBalance < item.price) {
-      alert('금액이 부족합니다.');
+      console.log(1);
+      setErrorModal({ open: true, message: '금액이 부족합니다.' });
       return;
     }
 
@@ -88,10 +94,10 @@ const MarketPage = () => {
           balance: userBalance - item.price,
         });
       }
-
+      setPurchaseSuccess({ open: true, itemName: item.name });
     } catch (error) {
       console.error('구매 요청 실패:', error);
-      alert('구매 요청 제출에 실패했습니다.');
+      setErrorModal({ open: true, message: '구매 요청 제출에 실패했습니다.' });
     }
   };
 
@@ -134,6 +140,30 @@ const MarketPage = () => {
           </div>
         </>
       )}
+      {/* 에러 모달 */}
+      <Dialog open={errorModal.open} onOpenChange={() => setErrorModal({ ...errorModal, open: false })}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>알림</DialogTitle>
+          </DialogHeader>
+          <div>{errorModal.message}</div>
+          <DialogFooter>
+            <Button onClick={() => setErrorModal({ ...errorModal, open: false })}>닫기</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      {/* 구매 성공 모달 */}
+      <Dialog open={purchaseSuccess.open} onOpenChange={() => setPurchaseSuccess({ ...purchaseSuccess, open: false })}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>구매 완료</DialogTitle>
+          </DialogHeader>
+          <div>{purchaseSuccess.itemName} 구매 요청이 제출되었습니다!</div>
+          <DialogFooter>
+            <Button onClick={() => setPurchaseSuccess({ ...purchaseSuccess, open: false })}>닫기</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
