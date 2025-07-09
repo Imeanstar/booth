@@ -25,7 +25,7 @@ const CoinSellModal = ({ amount, onConfirm, currentPrice }) => {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button 
-                    className="bg-[#39e079] text-black font-bold"
+                    className="bg-[#39e079] dark:bg-[#39e079] text-black font-bold"
                     onClick={()=>setOpen(true)}    
                 >
                     코인 판매하기
