@@ -4,14 +4,14 @@ import { getFirestore, collection, query, where, getDocs } from 'firebase/firest
 
 // Firebase 설정
 const firebaseConfig = {
-    apiKey: "AIzaSyCNWJuk6YblNTMIJAkcjsYMOBWskI2N2dg",
-    authDomain: "booth-aia.firebaseapp.com",
-    databaseURL: "https://your-project.firebaseio.com",
-    projectId: "booth-aia",
-    storageBucket: "booth-aia.firebasestorage.app",
-    messagingSenderId: "241305934309",
-    appId: "1:241305934309:web:06f919ec7bba3f2fd9370c",
-    measurementId: "G-44E1MLNN4Z"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
   };
   
 
