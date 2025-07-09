@@ -27,7 +27,8 @@ const MarketBuyModal = ({ item, onConfirm }) => {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>정말 {item.name}을 구매하시겠습니까?</DialogTitle>
+          <DialogTitle>정말 {item.name}을</DialogTitle>
+          <DialogTitle>구매하시겠습니까?</DialogTitle>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>

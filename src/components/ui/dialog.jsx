@@ -37,7 +37,7 @@ export function DialogFooter({ children }) {
 
 export function DialogTitle({ children }) {
   return (
-    <RadixDialog.Title className="text-lg font-semibold">
+    <RadixDialog.Title className="text-lg font-semibold pr-4">
       {children}
     </RadixDialog.Title>
   );

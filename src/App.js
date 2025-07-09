@@ -1,11 +1,13 @@
 // TODOLIST
 // 최종 ✨ 으로 🎉 해야 하는 것 🧨 -> 설치한 패키지 잘 연계시키기
 //    존나 많이 설치했다는 점 잊지말기
-// 각 페이지 modal창
-// 구글폼 연동 기능 (완료)
 // nav bar animation 및 색상 변환 작업
 // 코인 가격 chart
-// 구글폼 적으면 자동으로 코인 들어가게 할까?
+
+
+// 각 페이지 modal창 (완료[수정 필요할수도 있음])
+// 구글폼 연동 기능 (완료)
+// 구글폼 적으면 자동으로 코인 들어가게 할까? (완료 - 수치 조정 필요시, Apps Script[시크릿탭] 에서 수치 조절하기)
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
