@@ -160,7 +160,7 @@ const ChartPage = () => {
       },
       y: {
         ticks: {
-          color : '#0e1a13',
+          color : '#2e4c90',
         },
         grid: {
           color: '#e8f2ec',
@@ -170,25 +170,57 @@ const ChartPage = () => {
   }
 
   return (
-    <div className="relative flex size-full min-h-screen flex-col bg-[#f8fbfa] justify-between group/design-root overflow-x-hidden">
+    <div className="relative flex size-full min-h-screen flex-col bg-[#eaeaea] justify-between group/design-root overflow-x-hidden">
       <div>
         <div className="flex flex-wrap gap-4 px-4 py-6">
           <div className="flex min-w-72 flex-1 flex-col gap-2">
-            <p className="text-[#0e1a13] text-base font-medium leading-normal">실시간 증연코인 시세</p>
-            <p className="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight truncate">
-              {currentPrice !== null && (
-                <h3>현재 가격: {currentPrice.toLocaleString()} 원</h3>
-              )}
-            </p>
-            <div className="flex flex-col gap-1">
-              <p className="text-[#0e1a13] text-base font-semibold leading-normal">
-                Today {formatChangeDisplay(todayChange)} ￦
-              </p>
-              <p className="text-[#0e1a13] text-base font-semibold leading-normal">
-                Recent {formatChangeDisplay(recentChange)} ￦
-              </p>
+            
+            <div className='place-items-center'>
+              <div className='flex w-[356px] h-[146px] bg-[#2e4c90] rounded-xl'>
+                <div className='flex flex-col'>
+                  <p className="flex text-white font-medium leading-normal w-[206px] h-[19px] mt-11 ml-[37px]">실시간 증연코인 시세</p>
+                  <p className="flex text-white tracking-light text-[26px] font-bold leading-tight truncate w-[200px] h-[31px] mt-2 ml-[37px]">
+                    {currentPrice !== null && (
+                      <h3>현재 가격: {currentPrice.toLocaleString()} 원</h3>
+                    )}
+                  </p>
+                </div>
+                <img src='/symbol-white.png' alt='symbol-chart' className='flex w-[100px] h-[100px] rotate-12 opacity-50 mt-6'></img>
+              </div>
             </div>
-            {loading ? <div>Loading...</div> : <Line data={chartData} options={chartOption} />}
+            
+            <div className='place-items-center'>
+              <div className='flex w-[209px] h-[36px] bg-red-100'></div>
+            </div>
+
+            <div className='place-items-center'>
+              <div className='flex flex-col mt-5 rounded-xl bg-white w-[356px] h-[225px] shadow-2xl'>
+                {loading ? <div>Loading...</div> : <Line data={chartData} options={chartOption} className='mt-[45px] ml-[13px] mr-[39px] pb-[10px]' />}
+
+                <div className="flex justify-center gap-8">
+                  <div className='flex gap-1'>
+                    <p className="flex text-[#565656] text-base font-normal leading-normal">
+                      Today 
+                    </p>
+                    <p className="flex">
+                      {formatChangeDisplay(todayChange)}
+                    </p>
+                  </div>
+                  <div className='flex gap-1'>
+                    <p className="flex text-[#565656] text-base font-normal leading-normal">
+                      Recent 
+                    </p>
+                    <p className="flex">
+                      {formatChangeDisplay(recentChange)}
+                    </p>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+
 
           </div>
         </div>

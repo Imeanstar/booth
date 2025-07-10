@@ -57,18 +57,56 @@ const Login = ({ setIsLoggedIn }) => {
 
   return (
     <div>
-      <h1>로그인</h1>
-
+      <div className='h-[189px] w-10'></div>
+      <div className='place-items-center'>
+        <div className='flex w-[330px]'>
+          <img src="/symbol.png" alt='symbol' className='flex w-[55px] h-[55px]'></img>
+        </div>
+        
+      </div>
+      
+      <div className='place-items-center w-full h-4'>
+        <p className='flex text-[13px] w-[333px]'>로그인하려면 인증 정보를 입력해주세요</p>
+      </div>
+      <div className='w-full h-[12.38px] mt-[62px] place-items-center mb-3'>
+        <p className='flex text-[12px] text-gray-400 w-[333px]'>아이디 ex) ajouinvest@ajou.ac.kr</p>
+      </div>
+      
+      
       {/* 이메일 입력 필드 */}
-      <input 
-        type="email" 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)} 
-        placeholder="이메일을 입력하세요" 
-      />
-
+      <div className='place-items-center h-9'>
+        <input 
+          type="email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+          placeholder="아이디" 
+          className='flex rounded-lg mt-[6.81px] w-[333px] h-9 text-[12px] placeholder:text-gray-400'
+        />
+      </div>
       {/* 로그인 버튼 */}
-      <button onClick={handleLogin}>로그인</button>
+      <div className='w-full place-items-center mt-[9.81px]'>
+        <button 
+          onClick={handleLogin}
+          className='flex w-[333px] h-9 rounded-lg bg-gradient-to-r from-[#7b88bf] to-[#2d4a8f] items-center justify-center text-white '
+        >
+          시작하기
+        </button>
+      </div>
+
+      <div className='place-items-center mt-[7px]'>
+        <div className='flex w-[333px]'>
+          <img src='/symbol.png' alt='id_save' className='h-[17px] w-[17px]'></img>
+          <p className='text-[12px] text-gray-600'>아이디 저장</p>
+        </div>
+      </div>
+      
+      <div className='place-items-center'>
+        <div className='flex bg-[#d9d9d9] w-[333px] h-[0.5px] mt-8'></div>
+      </div>
+      
+      <div className='place-items-center'>
+        <div className='flex bg-[#2c4a8f] w-[333px] h-[38px] rounded-lg mt-5'></div>
+      </div>
 
       {/* 에러 메시지 표시 */}
       {error && <p style={{ color: 'red' }}>{error}</p>}
