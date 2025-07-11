@@ -194,7 +194,7 @@ const ChartPage = () => {
             </div>
 
             <div className='place-items-center'>
-              <div className='flex flex-col mt-5 rounded-xl bg-white w-[356px] h-[225px] shadow-2xl'>
+              <div className='flex flex-col mt-5 rounded-xl bg-white w-[356px] h-[225px] shadow-xl'>
                 {loading ? <div>Loading...</div> : <Line data={chartData} options={chartOption} className='mt-[45px] ml-[13px] mr-[39px] pb-[10px]' />}
 
                 <div className="flex justify-center gap-8">
@@ -219,31 +219,54 @@ const ChartPage = () => {
               </div>
             </div>
             
-            
+            <div className='place-items-center  w-full mt-5'>
+              <div className='flex w-[200px] justify-center items-center gap-4'>
+                <p className='flex text-[12px] text-[#7f8bc2]'>현재 시장 진행 중</p>
+                <p className='flex text-[10px] text-[#9a9a9a] align-center'>마감까지 00분 남음</p>
+              </div>
+            </div>
 
+            <div className='place-items-center  w-full h-[38px] mt-3'>
+              <div className='flex bg-[#2e4c90] w-[351px] h-[38px] justify-center items-center gap-4 rounded-lg'>
+                <div className='flex gap-1'>
+                  <p className="text-white font-lightl">보유 코인: </p>
+                  <p className="text-white font-normal"> {userCoin.toLocaleString()} 개</p>
+                </div>
+                <p className="text-white text-base font-light">│</p>
+                <div className='flex gap-1'>
+                  <p className="text-white font-light">보유 금액: </p>
+                  <p className="text-white font-normal"> {userBalance.toLocaleString()} 원</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className='w-full h-[43px] mt-[15px] place-items-center'>
+              <div className='flex w-[351px]'>
+                <label className="flex flex-col w-[224px] flex-1">
+                  <input
+                    type="number"
+                    placeholder="매도 수량"
+                    value={sellAmount}
+                    onChange={(e) => setSellAmount(e.target.value)}
+                    min={1}
+                    max={userCoin}
+                    className="form-input flex w-[224px] rounded-3xl 
+                    bg-white outline-style:solid
+                    text-center text-gray-500 font-normal text-[14px]
+                    focus:outline-0 focus:ring-0 focus:border-none text-[#2e4c90]"
+                  />
+                </label>
+
+                <CoinSellModal
+                  amount={Number(sellAmount)}
+                  currentPrice={currentPrice}
+                  onConfirm={()=>confirmSell(Number(sellAmount))}
+                  className='flex'
+                />
+              </div>
+            </div>
 
           </div>
-        </div>
-        <br/>
-        <p className="text-[#0e1a13] text-base font-semibold leading-normal pb-0 pt-1 px-4">보유 코인: {userCoin.toLocaleString()} 개</p>
-        <p className="text-[#0e1a13] text-base font-semibold leading-normal pb-0 pt-1 px-4">보유 금액: {userBalance.toLocaleString()} 원</p>
-        <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-          <label className="flex flex-col min-w-40 flex-1">
-            <input
-              type="number"
-              placeholder="매도 수량"
-              value={sellAmount}
-              onChange={(e) => setSellAmount(e.target.value)}
-              min={1}
-              max={userCoin}
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
-            />
-          </label>
-            <CoinSellModal
-              amount={Number(sellAmount)}
-              currentPrice={currentPrice}
-              onConfirm={()=>confirmSell(Number(sellAmount))}
-            />
         </div>
       </div>
     </div>

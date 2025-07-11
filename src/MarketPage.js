@@ -102,9 +102,37 @@ const MarketPage = () => {
   };
 
   return (
-    <div>
-      <h3 class="text-[#101913] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">현재 보유 금액</h3>
-      <p class="text-[#101913] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">{userBalance.toLocaleString()} 원</p> 
+    <div className='bg-[#eaeaea]'>
+      <div className='w-full h-[88px]'></div>
+      <div className='place-items-center w-full'>
+        <div className='flex flex-col jutify-center items-center w-[352px] h-[106px] bg-white rounded-3xl'>
+          <p class="flex mt-9 text-[14px] font-600">현재 보유 금액</p>
+          <p class="flex mt-1 text-[14px] font-800 text-[#2e4c90]">{userBalance.toLocaleString()} 원</p>
+        </div>
+      </div>
+
+      <div className='w-full'>
+        <div className='place-items-center w-full'>
+          <div className='w-[209px] h-[36px] bg-red-100 mt-[36px]'></div>
+        </div>
+      </div>
+
+      <div className='w-full'>
+        <div className='place-items-center w-full h-[364px] bg-orange-50 mt-[41px]'>
+          <div className=''>
+
+          </div>
+        </div>
+      </div>
+
+      <div className='w-full'>
+        <div className='place-items-center'>
+          <div className='flex w-[349px] h-[55px] mt-[41px] bg-yellow-50'>
+
+          </div>
+        </div>
+      </div>
+       
 
       {/* 로딩 상태 또는 아이템 목록 표시 */}
       {loading ? (
