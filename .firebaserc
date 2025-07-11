@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "booth-test-9f496"
-  }
+    "default": "booth-aia"
+  },
+  "targets": {},
+  "etags": {}
 }

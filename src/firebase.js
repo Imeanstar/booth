@@ -4,15 +4,16 @@ import { getFirestore, collection, query, where, getDocs } from 'firebase/firest
 
 // Firebase 설정
 const firebaseConfig = {
-    apiKey: "AIzaSyCNWJuk6YblNTMIJAkcjsYMOBWskI2N2dg",
-    authDomain: "booth-aia.firebaseapp.com",
-    databaseURL: "https://your-project.firebaseio.com",
-    projectId: "booth-aia",
-    storageBucket: "booth-aia.firebasestorage.app",
-    messagingSenderId: "241305934309",
-    appId: "1:241305934309:web:06f919ec7bba3f2fd9370c",
-    measurementId: "G-44E1MLNN4Z"
-  };
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+};
+
   
 
 // Firebase 초기화
