@@ -115,8 +115,8 @@ const MarketPage = () => {
       <div className='w-full h-[88px]'></div>
       <div className='place-items-center w-full'>
         <div className='flex flex-col jutify-center items-center w-[352px] h-[106px] bg-white rounded-3xl mb-[36px]'>
-          <p class="flex mt-9 text-[14px] font-600">현재 보유 금액</p>
-          <p class="flex mt-1 text-[14px] font-800 text-[#2e4c90]">{userBalance.toLocaleString()} 원</p>
+          <p class="flex mt-9 text-[14px] font-semibold">현재 보유 금액</p>
+          <p class="flex mt-1 text-[14px] font-bold text-[#2e4c90]">{userBalance.toLocaleString()} 원</p>
         </div>
       </div>
 
