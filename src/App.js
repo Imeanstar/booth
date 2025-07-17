@@ -12,8 +12,7 @@
 // 구글폼 적으면 자동으로 코인 들어가게 할까? (완료 - 수치 조정 필요시, Apps Script[시크릿탭] 에서 수치 조절하기)
 
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import ChartPage from './ChartPage';
 import MarketPage from './MarketPage';
 import Login from './Login';
@@ -23,42 +22,9 @@ import AdminPage from './AdminPage.js';
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
   const userRole = localStorage.getItem('userRole');
-  const location = useLocation();
-  const isChart = location.pathname === '/chart';
-  const isMarket = location.pathname === '/market';
 
   return (
       <div>
-        {/* 로그인 상태에 따라 다르게 표시되는 네비게이션 */}
-        {isLoggedIn 
-          ? userRole === 'admin' 
-            ? (
-              <nav>
-
-              </nav>
-              ) 
-        
-          : (
-            <nav>
-              <div class="pb-3">
-                <div class="flex border-b border-[#d1e6d9] px-4 gap-8">
-                  <Link 
-                    to="/chart"
-                    className={`flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 ${isChart ? 'border-b-[#39e079] text-[#0e1a13]' : 'border-b-transparent text-[#51946b]'}`}  
-                  >
-                    <p class="text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]">📈 Chart</p>
-                  </Link>
-                  <Link 
-                    to="/market"
-                    className={`flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 ${isMarket ? 'border-b-[#39e079] text-[#0e1a13]' : 'border-b-transparent text-[#51946b]'}`}
-                  >
-                    <p className="text-[#51946b] text-sm font-bold leading-normal tracking-[0.015em]">🛒 Market</p>
-                  </Link>
-                </div>
-              </div>
-            </nav>
-          ) 
-        : <div></div>}
 
         <Routes>
           {/* 로그인 페이지가 첫 화면에 나오도록 설정 */}

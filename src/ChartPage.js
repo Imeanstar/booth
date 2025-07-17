@@ -8,6 +8,7 @@ import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend
 } from 'chart.js';
 import CoinSellModal from "./components/CoinSellModal";
+import { Link, useLocation } from 'react-router-dom';
 
 // Chart.js 구성 요소 등록
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -23,6 +24,10 @@ const ChartPage = () => {
   const [currentPrice, setCurrentPrice] = useState(null);
 
   const userEmail = localStorage.getItem('userEmail'); // 로컬 스토리지에서 이메일 불러오기
+
+  const location = useLocation();
+  const isChart = location.pathname === '/chart';
+  const isMarket = location.pathname === '/market';
 
   useEffect(() => {
     // 코인 가격 히스토리 실시간 구독
@@ -173,10 +178,10 @@ const ChartPage = () => {
     <div className="relative flex size-full min-h-screen flex-col bg-[#eaeaea] justify-between group/design-root overflow-x-hidden">
       <div>
         <div className="flex flex-wrap gap-4 px-4 py-6">
-          <div className="flex min-w-72 flex-1 flex-col gap-2">
+          <div className="flex min-w-72 flex-1 flex-col">
             
             <div className='place-items-center'>
-              <div className='flex w-[356px] h-[146px] bg-[#2e4c90] rounded-xl'>
+              <div className='flex w-[356px] h-[146px] bg-[#2e4c90] rounded-xl mb-[19px]'>
                 <div className='flex flex-col'>
                   <p className="flex text-white font-medium leading-normal w-[206px] h-[19px] mt-11 ml-[37px]">실시간 증연코인 시세</p>
                   <p className="flex text-white tracking-light text-[26px] font-bold leading-tight truncate w-[200px] h-[31px] mt-2 ml-[37px]">
@@ -190,11 +195,26 @@ const ChartPage = () => {
             </div>
             
             <div className='place-items-center'>
-              <div className='flex w-[209px] h-[36px] bg-red-100'></div>
+              <div className='flex place-items-center justify-center gap-6 items-center w-[209px] h-[36px]'>
+                <Link
+                  to="/chart"
+                  className={`flex justify-center items-center w-[92px] h-[36px] rounded-full border text-sm font-semibold bg-white
+                    ${isChart ? 'text-blue-900 border-blue-500' : 'text-gray-400 border-gray-300'}`}
+                >
+                  차트
+                </Link>
+                <Link
+                  to="/market"
+                  className={`flex justify-center items-center w-[92px] h-[36px] rounded-full border text-sm font-semibold bg-white
+                    ${isMarket ? 'text-blue-900 border-blue-500' : 'text-gray-400 border-gray-300'}`}
+                >
+                  상점
+                </Link>
+              </div>
             </div>
 
             <div className='place-items-center'>
-              <div className='flex flex-col mt-5 rounded-xl bg-white w-[356px] h-[225px] shadow-2xl'>
+              <div className='flex flex-col mt-5 rounded-xl bg-white w-[356px] h-[225px] shadow-xl'>
                 {loading ? <div>Loading...</div> : <Line data={chartData} options={chartOption} className='mt-[45px] ml-[13px] mr-[39px] pb-[10px]' />}
 
                 <div className="flex justify-center gap-8">
@@ -219,31 +239,54 @@ const ChartPage = () => {
               </div>
             </div>
             
-            
+            <div className='place-items-center  w-full mt-5'>
+              <div className='flex w-[200px] justify-center items-center gap-4'>
+                <p className='flex text-[12px] text-[#7f8bc2]'>현재 시장 진행 중</p>
+                <p className='flex text-[10px] text-[#9a9a9a] align-center'>마감까지 00분 남음</p>
+              </div>
+            </div>
 
+            <div className='place-items-center  w-full h-[38px] mt-3'>
+              <div className='flex bg-[#2e4c90] w-[351px] h-[38px] justify-center items-center gap-4 rounded-lg'>
+                <div className='flex gap-1'>
+                  <p className="text-white font-lightl">보유 코인: </p>
+                  <p className="text-white font-normal"> {userCoin.toLocaleString()} 개</p>
+                </div>
+                <p className="text-white text-base font-light">│</p>
+                <div className='flex gap-1'>
+                  <p className="text-white font-light">보유 금액: </p>
+                  <p className="text-white font-normal"> {userBalance.toLocaleString()} 원</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className='w-full h-[43px] mt-[15px] place-items-center'>
+              <div className='flex w-[351px]'>
+                <label className="flex flex-col w-[224px] flex-1">
+                  <input
+                    type="number"
+                    placeholder="매도 수량"
+                    value={sellAmount}
+                    onChange={(e) => setSellAmount(e.target.value)}
+                    min={1}
+                    max={userCoin}
+                    className="form-input flex w-[224px] rounded-3xl 
+                    bg-white outline-style:solid
+                    text-center text-gray-500 font-normal text-[14px]
+                    focus:outline-0 focus:ring-0 focus:border-none text-[#2e4c90]"
+                  />
+                </label>
+
+                <CoinSellModal
+                  amount={Number(sellAmount)}
+                  currentPrice={currentPrice}
+                  onConfirm={()=>confirmSell(Number(sellAmount))}
+                  className='flex'
+                />
+              </div>
+            </div>
 
           </div>
-        </div>
-        <br/>
-        <p className="text-[#0e1a13] text-base font-semibold leading-normal pb-0 pt-1 px-4">보유 코인: {userCoin.toLocaleString()} 개</p>
-        <p className="text-[#0e1a13] text-base font-semibold leading-normal pb-0 pt-1 px-4">보유 금액: {userBalance.toLocaleString()} 원</p>
-        <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-          <label className="flex flex-col min-w-40 flex-1">
-            <input
-              type="number"
-              placeholder="매도 수량"
-              value={sellAmount}
-              onChange={(e) => setSellAmount(e.target.value)}
-              min={1}
-              max={userCoin}
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-14 placeholder:text-[#51946b] p-4 text-base font-normal leading-normal"
-            />
-          </label>
-            <CoinSellModal
-              amount={Number(sellAmount)}
-              currentPrice={currentPrice}
-              onConfirm={()=>confirmSell(Number(sellAmount))}
-            />
         </div>
       </div>
     </div>
