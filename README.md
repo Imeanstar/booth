@@ -2,6 +2,10 @@
 | --- | --- |
 | DB | firebase |
 
+## 로그인용 ID
+- user : user1@example.com
+- admin : admin@example.com
+
 2025-2 동아리 박람회 준비용.
 
 증연코인 발급하고 물품살수있게 하기.
