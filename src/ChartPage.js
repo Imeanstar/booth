@@ -8,6 +8,7 @@ import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend
 } from 'chart.js';
 import CoinSellModal from "./components/CoinSellModal";
+import { Link, useLocation } from 'react-router-dom';
 
 // Chart.js 구성 요소 등록
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -23,6 +24,10 @@ const ChartPage = () => {
   const [currentPrice, setCurrentPrice] = useState(null);
 
   const userEmail = localStorage.getItem('userEmail'); // 로컬 스토리지에서 이메일 불러오기
+
+  const location = useLocation();
+  const isChart = location.pathname === '/chart';
+  const isMarket = location.pathname === '/market';
 
   useEffect(() => {
     // 코인 가격 히스토리 실시간 구독
@@ -173,10 +178,10 @@ const ChartPage = () => {
     <div className="relative flex size-full min-h-screen flex-col bg-[#eaeaea] justify-between group/design-root overflow-x-hidden">
       <div>
         <div className="flex flex-wrap gap-4 px-4 py-6">
-          <div className="flex min-w-72 flex-1 flex-col gap-2">
+          <div className="flex min-w-72 flex-1 flex-col">
             
             <div className='place-items-center'>
-              <div className='flex w-[356px] h-[146px] bg-[#2e4c90] rounded-xl'>
+              <div className='flex w-[356px] h-[146px] bg-[#2e4c90] rounded-xl mb-[19px]'>
                 <div className='flex flex-col'>
                   <p className="flex text-white font-medium leading-normal w-[206px] h-[19px] mt-11 ml-[37px]">실시간 증연코인 시세</p>
                   <p className="flex text-white tracking-light text-[26px] font-bold leading-tight truncate w-[200px] h-[31px] mt-2 ml-[37px]">
@@ -190,7 +195,22 @@ const ChartPage = () => {
             </div>
             
             <div className='place-items-center'>
-              <div className='flex w-[209px] h-[36px] bg-red-100'></div>
+              <div className='flex place-items-center justify-center gap-6 items-center w-[209px] h-[36px]'>
+                <Link
+                  to="/chart"
+                  className={`flex justify-center items-center w-[92px] h-[36px] rounded-full border text-sm font-semibold bg-white
+                    ${isChart ? 'text-blue-900 border-blue-500' : 'text-gray-400 border-gray-300'}`}
+                >
+                  차트
+                </Link>
+                <Link
+                  to="/market"
+                  className={`flex justify-center items-center w-[92px] h-[36px] rounded-full border text-sm font-semibold bg-white
+                    ${isMarket ? 'text-blue-900 border-blue-500' : 'text-gray-400 border-gray-300'}`}
+                >
+                  상점
+                </Link>
+              </div>
             </div>
 
             <div className='place-items-center'>

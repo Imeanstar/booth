@@ -14,6 +14,11 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './components/ui/dialog';
 import { Button } from './components/ui/button';
 import MarketBuyModal from './components/MarketBuyModal';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import { FreeMode } from 'swiper/modules';
+import { Link, useLocation } from 'react-router-dom';
 
 const MarketPage = () => {
   const [items, setItems] = useState([]); // 마켓 아이템 목록 상태
@@ -22,6 +27,10 @@ const MarketPage = () => {
   const [userDocId, setUserDocId] = useState(null); // 사용자 문서 ID
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const [purchaseSuccess, setPurchaseSuccess] = useState({ open: false, itemName: '' });
+
+  const location = useLocation();
+  const isChart = location.pathname === '/chart';
+  const isMarket = location.pathname === '/market';
 
 
   const userEmail = localStorage.getItem('userEmail'); // 로컬 스토리지에서 사용자 이메일 가져오기
@@ -105,7 +114,7 @@ const MarketPage = () => {
     <div className='bg-[#eaeaea]'>
       <div className='w-full h-[88px]'></div>
       <div className='place-items-center w-full'>
-        <div className='flex flex-col jutify-center items-center w-[352px] h-[106px] bg-white rounded-3xl'>
+        <div className='flex flex-col jutify-center items-center w-[352px] h-[106px] bg-white rounded-3xl mb-[36px]'>
           <p class="flex mt-9 text-[14px] font-600">현재 보유 금액</p>
           <p class="flex mt-1 text-[14px] font-800 text-[#2e4c90]">{userBalance.toLocaleString()} 원</p>
         </div>
@@ -113,14 +122,65 @@ const MarketPage = () => {
 
       <div className='w-full'>
         <div className='place-items-center w-full'>
-          <div className='w-[209px] h-[36px] bg-red-100 mt-[36px]'></div>
+          <div className='flex place-items-center justify-center gap-6 items-center w-[209px] h-[36px]'>
+            <Link
+              to="/chart"
+              className={`flex justify-center items-center w-[92px] h-[36px] rounded-full border text-sm font-semibold bg-white
+              ${isChart ? 'text-blue-900 border-blue-500' : 'text-gray-400 border-gray-300'}`}
+            >
+              차트
+            </Link>
+            <Link
+              to="/market"
+              className={`flex justify-center items-center w-[92px] h-[36px] rounded-full border text-sm font-semibold bg-white
+              ${isMarket ? 'text-blue-900 border-blue-500' : 'text-gray-400 border-gray-300'}`}
+            >
+              상점
+            </Link>
+          </div>
         </div>
       </div>
 
       <div className='w-full'>
-        <div className='place-items-center w-full h-[364px] bg-orange-50 mt-[41px]'>
-          <div className=''>
-
+        <div className='place-items-center w-full h-[364px] mt-[41px]'>
+          <div className='w-full overflow-x-auto'>
+            <Swiper
+              modules={[FreeMode]}
+              slidesPerView="auto"
+              spaceBetween={16}
+              freeMode={true}
+              grabCursor={true}
+              className="pl-4 pr-4"
+            >
+              {items.map(item => (
+                <SwiperSlide key={item.id} className="!w-[188px] !h-[364px]">
+                  <div className='bg-[#f9fbfa] p-4 rounded-xl shadow flex flex-col w-[188px] h-[364px]'>
+                    <div className='w-[170px] h-[170px] mb-12'>
+                      <img src={item.imageUrl} // Firestore에 저장한 이미지 URL
+                        alt={item.name}
+                        className=" object-contain mb-2">
+                      </img>
+                    </div>
+                    <div className='flex flex-col justify-center'>
+                      
+                      <p className='text-[#101913] text-base font-medium leading-normal line-clamp-1'>
+                        {item.name}
+                      </p>
+                      <p className='text-[#5a8c6d] text-sm font-normal leading-normal line-clamp-2'>
+                        가격: {item.price.toLocaleString()} 원 | 수량: {item.stock} 개
+                      </p>
+                    </div>
+                    <div className='shrink-0'>
+                      {item.stock > 0 ? (
+                        <MarketBuyModal item={item} onConfirm={handleBuy} />
+                      ) : (
+                        <button disabled className="text-xs text-gray-400">품절</button>
+                      )}
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>
@@ -134,7 +194,7 @@ const MarketPage = () => {
       </div>
        
 
-      {/* 로딩 상태 또는 아이템 목록 표시 */}
+      {/* 로딩 상태 또는 아이템 목록 표시
       {loading ? (
         <div>Loading...</div>
       ) : (
@@ -167,7 +227,7 @@ const MarketPage = () => {
             )}
           </div>
         </>
-      )}
+      )} */}
       {/* 에러 모달 */}
       <Dialog open={errorModal.open} onOpenChange={() => setErrorModal({ ...errorModal, open: false })}>
         <DialogContent>
