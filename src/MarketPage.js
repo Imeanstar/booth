@@ -152,22 +152,31 @@ const MarketPage = () => {
               grabCursor={true}
               className="pl-4 pr-4"
             >
-              {items.map(item => (
-                <SwiperSlide key={item.id} className="!w-[188px] !h-[364px]">
-                  <div className='bg-[#f9fbfa] p-4 rounded-xl shadow flex flex-col w-[188px] h-[364px]'>
-                    <div className='w-[170px] h-[170px] mb-12'>
+              {items.map((item,index) => (
+                <SwiperSlide key={item.id} className={`!w-[188px] !h-[364px] ${index === 0 ? 'ml-6' : ''}`}>
+                  <div className='bg-[#f9fbfa] p-4 rounded-xl shadow flex flex-col w-[188px] h-[364px] place-items-center'>
+                    <div className='w-[153px] h-[210px]'>
                       <img src={item.imageUrl} // Firestore에 저장한 이미지 URL
                         alt={item.name}
-                        className=" object-contain mb-2">
+                        className=" object-contain mb-2 w-[153px] h-[210px]">
                       </img>
                     </div>
-                    <div className='flex flex-col justify-center'>
-                      
+
+                    <div className='flex flex-col justify-center place-items-center mb-[9px]'>
                       <p className='text-[#101913] text-base font-medium leading-normal line-clamp-1'>
                         {item.name}
                       </p>
-                      <p className='text-[#5a8c6d] text-sm font-normal leading-normal line-clamp-2'>
-                        가격: {item.price.toLocaleString()} 원 | 수량: {item.stock} 개
+                    </div>
+
+                    <div className='flex justify-between place-items-center w-[126px] mb-[13px]'>
+                      <p className='text-[#2E4C90] text-[10px] font-black'>
+                        가격: {item.price.toLocaleString()} 원
+                      </p>
+                      <p className='text-[#2E4C90] text-[10px] font-black'>
+                        |
+                      </p>
+                      <p className='text-[#2E4C90] text-[10px] font-black'>
+                        수량: {item.stock} 개
                       </p>
                     </div>
                     <div className='shrink-0'>

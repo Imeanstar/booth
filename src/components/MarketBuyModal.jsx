@@ -22,7 +22,7 @@ const MarketBuyModal = ({ item, onConfirm }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-[#e9f1ec] text-black text-sm">구매하기</Button>
+        <Button className="bg-gradient-to-r from-[#7F8BC2] to-[#3D5799] text-white text-[10px] font-900 rounded-3xl w-[140px] h-[31px]">구매하기</Button>
       </DialogTrigger>
 
       <DialogContent>
