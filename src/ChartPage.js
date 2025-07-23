@@ -119,8 +119,10 @@ const ChartPage = () => {
         label: '증연 코인 시세',
         data: priceData.map(p => p.price),
         fill: false,
-        borderColor: 'rgba(24,140,76,1)',
-        tension: 0.1,
+        borderColor: 'rgba(46,76,144,1)',
+        tension: 0.3,
+        pointRadius : 0,
+        pointHoverRadius : 0
       }
     ]
   };
@@ -128,7 +130,7 @@ const ChartPage = () => {
   const formatChangeDisplay = (value) => {
     if (value > 0) {
       return <span className="text-red-500">▲ {value}</span>;
-    } else if (value < 0) {
+    } else if (value < 0) { 
       return <span className="text-blue-500">▼ {Math.abs(value)}</span>;
     } else {
       return <span className="text-gray-500">0</span>;
